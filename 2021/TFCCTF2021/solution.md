@@ -43,7 +43,7 @@ r.close()
 ```Flags:TFCCTF{1_w0n7_4dm1t_h0w_l0ng_th1s_t00k_4_me...congrats,tho!} ```
 
 # KH5YHLZVJP
-**Exloit Mersenne Twister pseudorandom number generator**
+**Exploit Mersenne Twister pseudorandom number generator**
 ```python
 from pwn import remote,xor
 from mt19937predictor import MT19937Predictor
