@@ -1,0 +1,37 @@
+#JAM
+
+-**A challenge which we need to use hash length extension attack**
+
+```python
+import hashpumpy
+from pwn import remote
+
+r = remote('server.challenge.ctf.thefewchosen.com', '1343')
+r.recvuntil(b'>')
+r.sendline(b'5') # to get the hash of { secrete + ' ' + '0' }
+token = r.recvline() # token = hash of { secrete + ' ' + '0' }
+token = token.decode().strip()
+
+for i in range(0,1000,1): # brute force to find length of {secrete} to do a hash length extension attack
+    r.recvuntil(b'>')
+    r.sendline(b'3') # To recover session
+    r.recvuntil(b'>')
+    payload, mess = hashpumpy.hashpump(token.encode(),b' 0',b'11',i) # can choose any number >= 6, but i just like the number 11 :v 
+    # payload is the new hash from {secrete + b' ' + b'0' + padding + b'11'}
+    # mess is ' 0{padding}11' 
+    r.sendline(mess.strip()) # since i dont need the space character(" ") to be in mess(server will add ' ' to my input). i strip off the ' ' at the beginning of mess
+    r.recvuntil(b'>')
+    r.sendline(payload)
+    response = r.recvline()
+    if response == b'Recovered successfully!':
+        r.recvuntil(b'>')
+        r.sendline(b'2') # to TRADE
+        r.recvuntil(b'>')
+        r.sendline(b'1') # to BUY FLAG
+        flag = r.recvline() #recover the flag
+        print(flag)
+        break
+    print("Round: ",i)
+    
+r.close()
+```
