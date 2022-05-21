@@ -1,3 +1,3 @@
 # CTF-Writeup
-- **Mostly _Crypto_ and maybe some _Reversing_**
+- **Mostly _Pwn_ and maybe some _Crytpto_**
 
