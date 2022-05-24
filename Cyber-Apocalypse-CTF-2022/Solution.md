@@ -54,7 +54,7 @@ print(f"Flag found: {flag}")
 
 # Space Pirate: Fleet Management
 
-* If you disassemble the program, you will see there is a hidden input (9). Upon pressing 9 the program will read our input. With a bit knowledge in reversing, you will realize that the program will treat your input as a sequence of instrunctions and attemp to run it
+* If you disassemble the program, you will see there is a hidden input (9). Upon pressing 9 the program will read our input. With a bit knowledge in reversing, you will realize that the program will treat your input as a sequence of instrunctions and attempt to run it
 * But there are restrictions, we can not call system('/bin/sh') because of the seccomp_rule, we are only allowed to execute openat and sendfile, but that's all we need.
 
 ```python
